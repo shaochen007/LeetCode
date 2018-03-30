@@ -12,7 +12,7 @@ package subject2
  *     原因：342 + 465 = 807
  */
 fun main(args: Array<String>) {
-//    println(createRandomRectangle().isSquare)
+
     val l1 = ListNode(2)
     l1.next = ListNode(4)
     l1.next?.next = ListNode(3)
