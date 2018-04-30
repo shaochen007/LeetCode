@@ -35,7 +35,7 @@ fun lengthOfLongestSubstring(s: String): Int {
         if (containsIndex >= 0) {
             // 记录新的子串之前，记录最长子串的长度
             result = Math.max(result, tempStr.length)
-            tempStr = tempStr.delete(0, containsIndex + 1)
+            tempStr = tempStr.removeRange(0, containsIndex + 1) as StringBuilder
         }
 
         tempStr.append(it)

@@ -15,12 +15,21 @@ fun main(args: Array<String>) {
     twoSum(intArrayOf(3,2,4), 6).forEach {
         println(it)
     }
+
+    Subject1().twoSum(intArrayOf(3,2,4), 6).forEach {
+        println(it)
+    }
+    Subject1().twoSum(intArrayOf(2,7,11,15), 16).forEach {
+        println(it)
+    }
+
+
 }
 
 fun twoSum(nums: IntArray, target: Int): IntArray {
     val map = mutableMapOf<Int, Int>()
     // 将数组转化成map<value, index>
-    nums.mapIndexed { index, i ->
+    nums.forEachIndexed { index, i ->
         map.put(i, index)
     }
 
