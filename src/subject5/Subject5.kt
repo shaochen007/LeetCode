@@ -54,26 +54,26 @@ fun longestPalindrome(s: String): String {
         return s
     }
 
-    var longestPalindrome = "${s[0]}"
+    var start = 0
+    var end = 0
     for ((index, value) in s.withIndex()) {
-        val palindrome = StringBuffer().append(value)
         // 相同字符长度
         var repLen = 1
         while (index + repLen < s.length && value == s[index + repLen]) {
-            palindrome.append(s[index + repLen])
             repLen ++
         }
 
         // 回文子串两边长
         var outLen = 0
         while (index - 1 - outLen >= 0 && index + repLen + outLen < s.length && s[index - 1 - outLen] == s[index + repLen + outLen]) {
-            palindrome.insert(0, s[index - 1 - outLen])
-            palindrome.append(s[index + repLen + outLen])
             outLen ++
         }
 
-        longestPalindrome = if (longestPalindrome.length > palindrome.length) longestPalindrome else palindrome.toString()
+        if (repLen + outLen + outLen > end - start) {
+            start = index - outLen
+            end = index + repLen + outLen
+        }
     }
 
-    return longestPalindrome
+    return s.substring(start, end)
 }
