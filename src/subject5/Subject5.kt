@@ -56,58 +56,22 @@ fun longestPalindrome(s: String): String {
 
     var longestPalindrome = "${s[0]}"
     for ((index, value) in s.withIndex()) {
-        if (index == 0 && value == s[index + 1]) {
-            longestPalindrome = "$value${s[index + 1]}"
-            continue
+        val palindrome = StringBuffer().append(value)
+        // 相同字符长度
+        var repLen = 1
+        while (index + repLen < s.length && value == s[index + repLen]) {
+            palindrome.append(s[index + repLen])
+            repLen ++
         }
 
-        if (index == 0 || index == s.length -1) {
-            continue
+        // 回文子串两边长
+        var outLen = 0
+        while (index - 1 - outLen >= 0 && index + repLen + outLen < s.length && s[index - 1 - outLen] == s[index + repLen + outLen]) {
+            palindrome.insert(0, s[index - 1 - outLen])
+            palindrome.append(s[index + repLen + outLen])
+            outLen ++
         }
 
-        val palindrome = StringBuffer()
-        if (value == s[index - 1] && value == s[index + 1]) { // 回文中间为叠字——两边
-            palindrome.append(s[index - 1]).append(value).append(s[index + 1])
-            var subIndex = index - 2
-            var count = 1
-            val indexPost = subIndex + 2 * count + 2
-            while (subIndex >= 0 && indexPost < s.length && s[subIndex] == s[indexPost]) {
-                palindrome.insert(0, s[subIndex]).append(s[indexPost])
-                subIndex--
-                count++
-            }
-        } else if (value == s[index - 1]) { // 回文中间为叠字——左边
-            palindrome.append(s[index - 1]).append(value)
-            var subIndex = index - 2
-            var count = 1
-            val indexPost = subIndex + 2 * count + 1
-            while (subIndex >= 0 && indexPost < s.length && s[subIndex] == s[indexPost]) {
-                palindrome.insert(0, s[subIndex]).append(s[indexPost])
-                subIndex--
-                count++
-            }
-        }
-        else if (value == s[index + 1]) { // 回文中间为叠字——右边
-            palindrome.append(value).append(s[index + 1])
-            var subIndex = index - 1
-            var count = 1
-            val indexPost = subIndex + 2 * count + 1
-            while (subIndex >= 0 && indexPost < s.length && s[subIndex] == s[indexPost]) {
-                palindrome.insert(0, s[subIndex]).append(s[indexPost])
-                subIndex--
-                count++
-            }
-        } else {
-            palindrome.append(value)
-            var subIndex = index - 1
-            var count = 1
-            val indexPost = subIndex + 2 * count
-            while (subIndex >= 0 && indexPost < s.length && s[subIndex] == s[indexPost]) {
-                palindrome.insert(0, s[subIndex]).append(s[indexPost])
-                subIndex--
-                count++
-            }
-        }
         longestPalindrome = if (longestPalindrome.length > palindrome.length) longestPalindrome else palindrome.toString()
     }
 
