@@ -30,6 +30,13 @@ fun main(args: Array<String>) {
 //    println(convert("A", 1))
 }
 
+/**
+ * 遍历字符串
+ * 首先，从当前字符开始，遍历出相同的子串，为回文串的对称串；
+ * 其次，再遍历，取出回文串对称串两边的子串
+ *
+ * ps：start、end为子串的开始、结束点下标
+ */
 fun longestPalindrome(s: String): String {
     if (s.isEmpty()) {
         return ""
@@ -41,10 +48,10 @@ fun longestPalindrome(s: String): String {
 
     var start = 0
     var end = 0
-    for ((index, value) in s.withIndex()) {
+    for (index in 0 until s.length - 1) {
         // 相同字符长度
         var repLen = 1
-        while (index + repLen < s.length && value == s[index + repLen]) {
+        while (index + repLen < s.length && s[index] == s[index + repLen]) {
             repLen ++
         }
 
